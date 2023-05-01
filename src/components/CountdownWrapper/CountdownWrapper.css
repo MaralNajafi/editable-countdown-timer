@@ -1,0 +1,11 @@
+.countdown-wrapper {
+  background: rgba(255, 219, 238, 0.25);
+  box-shadow: 0 1px 6px #ffdbee;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  min-height: 20rem;
+  width: 100%;
+  max-width: 400px;
+  transition: all 250ms;
+}

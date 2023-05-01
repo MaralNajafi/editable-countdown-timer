@@ -1,4 +1,8 @@
 import "./AppContainer.css";
 export default function AppContainer({ children }) {
-  return <div>{children}</div>;
+  return (
+      <div className="app-container flex justify-center items-center min-h-screen">
+      {children}
+    </div>
+  );
 }

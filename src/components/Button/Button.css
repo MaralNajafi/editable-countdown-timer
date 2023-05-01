@@ -1,0 +1,12 @@
+button {
+  letter-spacing: 0.5px;
+  font-size: 18px;
+  width: 8rem;
+  background-color: red;
+}
+
+button:disabled {
+  color: rgba(255, 255, 255, 0.286);
+  background-color: rgba(255, 255, 255, 0.11);
+  pointer-events: none;
+}

@@ -1,4 +1,16 @@
 @import "Reset.css";
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --main-gradiant: linear-gradient(
+    to right bottom,
+    #b60060,
+    #ca3b7e,
+    #dc5e9c,
+    #ee7eba,
+    #ff9dd8
+  );
+}
