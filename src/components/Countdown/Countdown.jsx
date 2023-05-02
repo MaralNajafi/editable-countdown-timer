@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 import "./Countdown.css";
-export default function Countdown() {
-  const SEC_PER_MIN = 60;
-  const [minutes, setMinutes] = useState("00");
-  const [seconds, setSeconds] = useState("00");
-  let [computedSeconds, setComputedSeconds] = useState();
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setMinutes,
+  setSeconds,
+  setComputedSeconds,
+} from "../../features/counter/counterSlice.js";
 
+export default function Countdown() {
+  const minutes = useSelector((state) => state.counter.minutes);
+  const seconds = useSelector((state) => state.counter.seconds);
+  const dispatch = useDispatch();
   useEffect(() => {
-    setComputedSeconds(minutes * SEC_PER_MIN + Number(seconds));
+    dispatch(setComputedSeconds());
   }, [minutes, seconds]);
 
   function handleTimeDisplay(input) {
@@ -30,10 +35,10 @@ export default function Countdown() {
         maxLength="2"
         onChange={(event) => {
           const givenMinutes = event.target.value;
-          setMinutes(givenMinutes.replace(/[^0-9]/g, ""));
+          dispatch(setMinutes(givenMinutes.replace(/[^0-9]/g, "")));
         }}
         onBlur={() => {
-          setMinutes(handleTimeDisplay(minutes));
+          dispatch(setMinutes(handleTimeDisplay(minutes)));
         }}
       />
       <span className="font-medium">:</span>
@@ -45,10 +50,10 @@ export default function Countdown() {
         onChange={(event) => {
           const givenSeconds =
             event.target.value <= 59 ? event.target.value : "59";
-          setSeconds(givenSeconds.replace(/[^0-9]/g, ""));
+          dispatch(setSeconds(givenSeconds.replace(/[^0-9]/g, "")));
         }}
         onBlur={() => {
-          setSeconds(handleTimeDisplay(seconds));
+          dispatch(setSeconds(handleTimeDisplay(seconds)));
         }}
       />
     </div>
