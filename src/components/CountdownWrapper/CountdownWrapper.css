@@ -9,3 +9,11 @@
   max-width: 400px;
   transition: all 250ms;
 }
+
+@media only screen and (max-width: 500px) {
+  .countdown-wrapper {
+    height: 100vh;
+    max-width: 100%;
+    border-radius: 0;
+  }
+}

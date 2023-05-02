@@ -20,18 +20,22 @@ export const counterSlice = createSlice({
     },
     setComputedSeconds: (state, action) => {
       state.computedSeconds = action.payload;
-        
     },
     decrement: (state) => {
-      state.computedSeconds -= 1
+      state.computedSeconds -= 1;
     },
     setIsCounting: (state, action) => {
       state.isCounting = action.payload;
-    }
+    },
   },
 });
 
-export const { setMinutes, setSeconds, setComputedSeconds, decrement, setIsCounting } =
-  counterSlice.actions;
+export const {
+  setMinutes,
+  setSeconds,
+  setComputedSeconds,
+  decrement,
+  setIsCounting,
+} = counterSlice.actions;
 
 export default counterSlice.reducer;

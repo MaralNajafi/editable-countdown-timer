@@ -27,17 +27,19 @@ export default function CountdownWrapper({ title }) {
   }
 
   return (
-    <div className="countdown-wrapper p-4">
+    <div className="countdown-wrapper flex flex-col justify-center items-center p-4">
       <h1 className="text-white text-3xl text-center capitalize">{title}</h1>
       <Countdown />
       <div className="flex flex-row justify-center gap-12">
         <Button
+          className={"capitalize font-medium rounded-3xl py-2 start-btn"}
           disabled={+computedSeconds === 0 ? true : false}
           onClick={isCounting ? handleStop : handleStart}
         >
           {isCounting ? "stop" : "start"}
         </Button>
         <Button
+          className={"capitalize font-medium rounded-3xl py-2 clear-btn"}
           disabled={+computedSeconds === 0 ? true : false}
           onClick={handleClear}
         >

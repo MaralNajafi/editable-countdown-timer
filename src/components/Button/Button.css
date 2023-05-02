@@ -2,9 +2,17 @@ button {
   letter-spacing: 0.5px;
   font-size: 18px;
   width: 8rem;
-  background-color: #fff;
-  color: var(--color-pink-200);
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.clear-btn {
+  background-color: #fff;
+  color: var(--color-pink-500);
+}
+
+.start-btn {
+  color: #fff;
+  background-color: var(--color-pink-500);
 }
 
 button:disabled {
