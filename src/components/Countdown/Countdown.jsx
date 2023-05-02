@@ -6,12 +6,12 @@ import {
   setSeconds,
   setComputedSeconds,
   decrement,
-  setIsCounting
+  setIsCounting,
 } from "../../features/counter/counterSlice.js";
 
 export default function Countdown() {
   let countdownInterval;
-  const SEC_PER_MIN = useSelector((state) => state.counter.SEC_PER_MIN)
+  const SEC_PER_MIN = useSelector((state) => state.counter.SEC_PER_MIN);
   const minutes = useSelector((state) => state.counter.minutes);
   const seconds = useSelector((state) => state.counter.seconds);
   const computedSeconds = useSelector((state) => state.counter.computedSeconds);
@@ -32,38 +32,39 @@ export default function Countdown() {
     return input;
   }
 
+  function handleTime() {
+    const minutesDisplay = Math.floor(computedSeconds / SEC_PER_MIN);
+    const secondsDisplay = Math.floor(computedSeconds % SEC_PER_MIN);
+
+    dispatch(
+      setMinutes(minutesDisplay >= 10 ? minutesDisplay : `0${minutesDisplay}`)
+    );
+    dispatch(
+      setSeconds(secondsDisplay >= 10 ? secondsDisplay : `0${secondsDisplay}`)
+    );
+  }
+
+  function handleStart() {
+    dispatch(setIsCounting(true));
+  }
+
   function handleCountdown() {
     if (isCounting) {
       dispatch(decrement());
-      const minutesDisplay = Math.floor(computedSeconds / SEC_PER_MIN);
-
-      dispatch(
-        setMinutes(minutesDisplay >= 10 ? minutesDisplay : `0${minutesDisplay}`)
-      );
-
-      const secondsDisplay = Math.floor(computedSeconds % SEC_PER_MIN);
-
-      dispatch(
-        setSeconds(secondsDisplay >= 10 ? secondsDisplay : `0${secondsDisplay}`)
-      );
     }
   }
 
-    function handleStart() {
-      dispatch(setIsCounting(true));
-    }
+  useEffect(() => {
+    isCounting && handleTime();
+    +computedSeconds === 0 && dispatch(setIsCounting(false));
+  }, [computedSeconds, isCounting]);
 
-    useEffect(() => {
-      +computedSeconds === 0 && dispatch(setIsCounting(false));
-    }, [computedSeconds]);
-
-    useEffect(() => {
-      countdownInterval = setInterval(handleCountdown, 1000);
-
-      return () => {
-        clearInterval(countdownInterval);
-      };
-    }, [isCounting]);
+  useEffect(() => {
+    countdownInterval = setInterval(handleCountdown, 1000);
+    return () => {
+      clearInterval(countdownInterval);
+    };
+  }, [isCounting]);
 
   return (
     <div className="countdown flex flex-row justify-center items-center text-white text-9xl">
