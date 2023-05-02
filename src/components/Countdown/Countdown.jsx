@@ -50,6 +50,10 @@ export default function Countdown() {
     }
   }
 
+  function handleStop() {
+    dispatch(setIsCounting(false));
+  }
+
   useEffect(() => {
     isCounting && handleTime();
     +computedSeconds === 0 && dispatch(setIsCounting(false));
@@ -73,6 +77,9 @@ export default function Countdown() {
           const givenMinutes = event.target.value;
           dispatch(setMinutes(givenMinutes.replace(/[^0-9]/g, "")));
         }}
+        onFocus={() => {
+          isCounting && handleStop();
+        }}
         onBlur={() => {
           dispatch(setMinutes(handleTimeDisplay(minutes)));
         }}
@@ -87,6 +94,9 @@ export default function Countdown() {
           const givenSeconds =
             event.target.value <= 59 ? event.target.value : "59";
           dispatch(setSeconds(givenSeconds.replace(/[^0-9]/g, "")));
+        }}
+        onFocus={() => {
+          isCounting && handleStop();
         }}
         onBlur={() => {
           dispatch(setSeconds(handleTimeDisplay(seconds)));
