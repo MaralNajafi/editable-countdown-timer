@@ -4,6 +4,7 @@ const initialState = {
   SEC_PER_MIN: 60,
   minutes: "00",
   seconds: "00",
+  isCounting: false,
   computedSeconds: 0,
 };
 
@@ -18,16 +19,20 @@ export const counterSlice = createSlice({
       state.seconds = action.payload;
     },
     setComputedSeconds: (state) => {
-      state.computedSeconds = state.minutes * state.SEC_PER_MIN + Number(state.seconds);
-      console.log(state.computedSeconds);
+      state.computedSeconds =
+        state.minutes * state.SEC_PER_MIN + Number(state.seconds);
     },
     decrement: (state) => {
-      state.value -= 1;
+      state.computedSeconds -= 1
     },
+    setIsCounting: (state, action) => {
+      state.isCounting = action.payload;
+    }
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setMinutes, setSeconds, setComputedSeconds } = counterSlice.actions;
+export const { setMinutes, setSeconds, setComputedSeconds, decrement, setIsCounting } =
+  counterSlice.actions;
 
 export default counterSlice.reducer;
