@@ -18,9 +18,9 @@ export const counterSlice = createSlice({
     setSeconds: (state, action) => {
       state.seconds = action.payload;
     },
-    setComputedSeconds: (state) => {
-      state.computedSeconds =
-        state.minutes * state.SEC_PER_MIN + Number(state.seconds);
+    setComputedSeconds: (state, action) => {
+      state.computedSeconds = action.payload;
+        
     },
     decrement: (state) => {
       state.computedSeconds -= 1

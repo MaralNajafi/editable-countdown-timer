@@ -18,7 +18,7 @@ export default function Countdown() {
   const isCounting = useSelector((state) => state.counter.isCounting);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(setComputedSeconds());
+    dispatch(setComputedSeconds(minutes * SEC_PER_MIN + Number(seconds)));
   }, [minutes, seconds]);
 
   function handleTimeDisplay(input) {
@@ -43,7 +43,6 @@ export default function Countdown() {
       setSeconds(secondsDisplay >= 10 ? secondsDisplay : `0${secondsDisplay}`)
     );
   }
-
 
   function handleCountdown() {
     if (isCounting) {
