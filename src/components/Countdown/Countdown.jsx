@@ -44,9 +44,6 @@ export default function Countdown() {
     );
   }
 
-  function handleStart() {
-    dispatch(setIsCounting(true));
-  }
 
   function handleCountdown() {
     if (isCounting) {
@@ -96,7 +93,6 @@ export default function Countdown() {
           dispatch(setSeconds(handleTimeDisplay(seconds)));
         }}
       />
-      <button onClick={handleStart}>test</button>
     </div>
   );
 }

@@ -13,4 +13,10 @@
     #ee7eba,
     #ff9dd8
   );
+
+  --color-pink-500: #b60060;
+  --color-pink-400: #ca3b7e;
+  --color-pink-300: #dc5e9c;
+  --color-pink-200: #ee7eba;
+  --color-pink-100: #ff9dd8;
 }

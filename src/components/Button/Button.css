@@ -2,7 +2,7 @@ button {
   letter-spacing: 0.5px;
   font-size: 18px;
   width: 8rem;
-  background-color: red;
+  background-color: var(--color-pink-500);
 }
 
 button:disabled {
