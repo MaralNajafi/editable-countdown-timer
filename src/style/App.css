@@ -20,3 +20,11 @@
   --color-pink-200: #ee7eba;
   --color-pink-100: #ff9dd8;
 }
+
+::-moz-selection { /* Code for Firefox */
+  background: var(--color-pink-100);
+}
+
+::selection {
+  background: var(--color-pink-100);
+}
