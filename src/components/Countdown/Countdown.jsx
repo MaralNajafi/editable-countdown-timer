@@ -62,6 +62,7 @@ export default function Countdown() {
     return () => {
       clearInterval(countdownInterval);
     };
+    // eslint-disable-next-line
   }, [isCounting]);
 
   return (
