@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import "./Countdown.css";
 import { useDispatch } from "react-redux";
 import useReduxVariables from "../../hooks/useReduxVariables";
@@ -19,6 +19,9 @@ export default function Countdown() {
   useEffect(() => {
     dispatch(setComputedSeconds(minutes * SEC_PER_MIN + Number(seconds)));
   }, [minutes, seconds, dispatch, SEC_PER_MIN]);
+
+  const secondsInputRef = useRef();
+  const minutesInputRef = useRef();
 
   function handleTimeDisplay(input) {
     if (input !== "" && input !== "00") {
@@ -64,6 +67,7 @@ export default function Countdown() {
     <div className="countdown flex flex-row justify-center items-center text-white text-9xl">
       <input
         className="text-center"
+        ref={minutesInputRef}
         value={minutes}
         type="text"
         maxLength="2"
@@ -72,6 +76,7 @@ export default function Countdown() {
           dispatch(setMinutes(givenMinutes.replace(/[^0-9]/g, "")));
         }}
         onFocus={() => {
+          minutesInputRef.current.select();
           isCounting && handleStop();
         }}
         onBlur={() => {
@@ -81,6 +86,7 @@ export default function Countdown() {
       <span className="font-medium">:</span>
       <input
         className="text-center"
+        ref={secondsInputRef}
         value={seconds}
         type="text"
         maxLength="2"
@@ -90,6 +96,7 @@ export default function Countdown() {
           dispatch(setSeconds(givenSeconds.replace(/[^0-9]/g, "")));
         }}
         onFocus={() => {
+          secondsInputRef.current.select();
           isCounting && handleStop();
         }}
         onBlur={() => {
