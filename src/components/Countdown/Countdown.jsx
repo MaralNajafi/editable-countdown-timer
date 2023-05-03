@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import "./Countdown.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import useReduxVariables from "../../hooks/useReduxVariables";
 import {
   setMinutes,
   setSeconds,
@@ -10,12 +11,9 @@ import {
 } from "../../features/counter/counterSlice.js";
 
 export default function Countdown() {
+  const { seconds, minutes, SEC_PER_MIN, computedSeconds, isCounting } =
+    useReduxVariables();
   let countdownInterval;
-  const SEC_PER_MIN = useSelector((state) => state.counter.SEC_PER_MIN);
-  const minutes = useSelector((state) => state.counter.minutes);
-  const seconds = useSelector((state) => state.counter.seconds);
-  const computedSeconds = useSelector((state) => state.counter.computedSeconds);
-  const isCounting = useSelector((state) => state.counter.isCounting);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setComputedSeconds(minutes * SEC_PER_MIN + Number(seconds)));
