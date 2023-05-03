@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import "./Countdown.css";
 import { useDispatch } from "react-redux";
 import useReduxVariables from "../../hooks/useReduxVariables";
+import useInterval from "../../hooks/useInterval";
 import {
   setMinutes,
   setSeconds,
@@ -13,7 +14,7 @@ import {
 export default function Countdown() {
   const { seconds, minutes, SEC_PER_MIN, computedSeconds, isCounting } =
     useReduxVariables();
-  let countdownInterval;
+  // let countdownInterval;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setComputedSeconds(minutes * SEC_PER_MIN + Number(seconds)));
@@ -30,7 +31,7 @@ export default function Countdown() {
     return input;
   }
 
-  function handleTime() {
+  const handleTime = useCallback(() => {
     const minutesDisplay = Math.floor(computedSeconds / SEC_PER_MIN);
     const secondsDisplay = Math.floor(computedSeconds % SEC_PER_MIN);
 
@@ -40,7 +41,7 @@ export default function Countdown() {
     dispatch(
       setSeconds(secondsDisplay >= 10 ? secondsDisplay : `0${secondsDisplay}`)
     );
-  }
+  }, [SEC_PER_MIN, computedSeconds, dispatch]);
 
   function handleCountdown() {
     if (isCounting) {
@@ -57,13 +58,7 @@ export default function Countdown() {
     +computedSeconds === 0 && dispatch(setIsCounting(false));
   }, [computedSeconds, isCounting, handleTime, dispatch]);
 
-  useEffect(() => {
-    countdownInterval = setInterval(handleCountdown, 1000);
-    return () => {
-      clearInterval(countdownInterval);
-    };
-    // eslint-disable-next-line
-  }, [isCounting]);
+  useInterval(handleCountdown, 1000, [isCounting]);
 
   return (
     <div className="countdown flex flex-row justify-center items-center text-white text-9xl">
