@@ -58,7 +58,7 @@ export default function Countdown() {
     +computedSeconds === 0 && dispatch(setIsCounting(false));
   }, [computedSeconds, isCounting, handleTime, dispatch]);
 
-  useInterval(handleCountdown, 1000, [isCounting]);
+  useInterval(handleCountdown, 1000, isCounting);
 
   return (
     <div className="countdown flex flex-row justify-center items-center text-white text-9xl">

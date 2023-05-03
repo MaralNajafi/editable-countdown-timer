@@ -13,7 +13,7 @@ const useInterval = (callback, delay, dependency) => {
     }
     let id = setInterval(tick, delay);
     return () => clearInterval(id);
-  }, [...dependency]);
+  }, [delay,dependency]);
 };
 
 export default useInterval;
