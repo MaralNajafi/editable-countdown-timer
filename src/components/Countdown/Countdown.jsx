@@ -19,7 +19,7 @@ export default function Countdown() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setComputedSeconds(minutes * SEC_PER_MIN + Number(seconds)));
-  }, [minutes, seconds]);
+  }, [minutes, seconds, dispatch, SEC_PER_MIN]);
 
   function handleTimeDisplay(input) {
     if (input !== "" && input !== "00") {
@@ -57,7 +57,7 @@ export default function Countdown() {
   useEffect(() => {
     isCounting && handleTime();
     +computedSeconds === 0 && dispatch(setIsCounting(false));
-  }, [computedSeconds, isCounting]);
+  }, [computedSeconds, isCounting, handleTime, dispatch]);
 
   useEffect(() => {
     countdownInterval = setInterval(handleCountdown, 1000);
