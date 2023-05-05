@@ -6,6 +6,7 @@ import {
   setMinutes,
   setSeconds,
   setIsCounting,
+  setHours,
 } from "../../features/counter/counterSlice.js";
 
 export default function CountdownWrapper({ title }) {
@@ -22,6 +23,7 @@ export default function CountdownWrapper({ title }) {
   }
 
   function handleClear() {
+    dispatch(setHours("00"));
     dispatch(setMinutes("00"));
     dispatch(setSeconds("00"));
     dispatch(setIsCounting(false));
