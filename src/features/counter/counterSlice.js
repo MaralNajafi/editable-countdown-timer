@@ -17,6 +17,14 @@ const handleDisplayTime = (time) => {
   return time;
 };
 
+const computeSeconds = (state) => {
+  const computedSeconds =
+    Number(state.hours) * SEC_PER_MIN * SEC_PER_MIN +
+    Number(state.minutes) * SEC_PER_MIN +
+    Number(state.seconds);
+  return computedSeconds;
+};
+
 // LOGIC MAINLY IN REDUCER
 
 export const counterSlice = createSlice({
@@ -25,20 +33,15 @@ export const counterSlice = createSlice({
   reducers: {
     setHours: (state, action) => {
       state.hours = action.payload;
-      state.computedSeconds = Number(state.hours) * SEC_PER_MIN * SEC_PER_MIN;
+      state.computedSeconds = computeSeconds(state);
     },
     setMinutes: (state, action) => {
       state.minutes = action.payload;
-      state.computedSeconds =
-        Number(state.minutes) * SEC_PER_MIN + Number(state.seconds);
+      state.computedSeconds = computeSeconds(state);
     },
     setSeconds: (state, action) => {
       state.seconds = action.payload;
-      state.computedSeconds =
-        Number(state.minutes) * SEC_PER_MIN + Number(state.seconds);
-    },
-    setComputedSeconds: (state, action) => {
-      state.computedSeconds = action.payload;
+      state.computedSeconds = computeSeconds(state);
     },
     decrement: (state) => {
       state.computedSeconds -= 1;
@@ -59,13 +62,7 @@ export const counterSlice = createSlice({
   },
 });
 
-export const {
-  setMinutes,
-  setSeconds,
-  setHours,
-  setComputedSeconds,
-  decrement,
-  setIsCounting,
-} = counterSlice.actions;
+export const { setMinutes, setSeconds, setHours, decrement, setIsCounting } =
+  counterSlice.actions;
 
 export default counterSlice.reducer;
