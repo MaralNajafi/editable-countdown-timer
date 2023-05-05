@@ -6,6 +6,7 @@ import useInterval from "../../hooks/useInterval";
 import {
   setMinutes,
   setSeconds,
+  setHours,
   decrement,
   setIsCounting,
 } from "../../features/counter/counterSlice.js";
@@ -32,6 +33,25 @@ export default function Countdown() {
 
   return (
     <div className="countdown flex flex-row justify-center items-center text-white text-9xl">
+      <input
+        className="text-center"
+        ref={hoursInputRef}
+        value={hours}
+        type="text"
+        maxLength="2"
+        onChange={(event) => {
+          const givenHours = event.target.value;
+          dispatch(setHours(givenHours.replace(/[^0-9]/g, "")));
+        }}
+        onFocus={() => {
+          hoursInputRef.current.select();
+          isCounting && handleStop();
+        }}
+        onBlur={() => {
+          dispatch(setHours(hours));
+        }}
+      />
+      <span className="font-medium">:</span>
       <input
         className="text-center"
         ref={minutesInputRef}

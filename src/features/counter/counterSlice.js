@@ -62,6 +62,7 @@ export const counterSlice = createSlice({
 export const {
   setMinutes,
   setSeconds,
+  setHours,
   setComputedSeconds,
   decrement,
   setIsCounting,
