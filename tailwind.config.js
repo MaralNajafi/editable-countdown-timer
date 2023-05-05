@@ -5,7 +5,6 @@ module.exports = {
     extend: {},
     fontSize: {
       "3xl": "2rem",
-      "9xl": "7rem",
     },
     fontFamily: {
       sans: '"Open Sans", sans-serif',

@@ -1,22 +1,25 @@
 .countdown input {
   width: 10rem;
+  height: 7rem;
   transition: all 250ms;
+  font-size: 6rem;
 }
 
 .countdown span {
-  padding-bottom: 20px;
+  font-size: 6rem;
   pointer-events: none;
+  margin-bottom: 16px;
   transition: all 250ms;
 }
 
 @media only screen and (max-width: 600px) {
   .countdown input {
     width: 6rem;
-    font-size: 5rem;
+    font-size: 4rem;
   }
   .countdown span {
-    padding-bottom: 12px;
-    font-size: 5rem;
+    font-size: 4rem;
+    margin-bottom: 10px;
   }
 }
 
@@ -26,7 +29,6 @@
     font-size: 3rem;
   }
   .countdown span {
-    padding-bottom: 6px;
     font-size: 3rem;
   }
 }

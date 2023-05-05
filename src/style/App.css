@@ -23,8 +23,10 @@
 
 ::-moz-selection { /* Code for Firefox */
   background: var(--color-pink-100);
+  color: white;
 }
 
 ::selection {
   background: var(--color-pink-100);
+  color: white;
 }

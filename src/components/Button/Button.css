@@ -2,17 +2,35 @@ button {
   letter-spacing: 0.5px;
   font-size: 18px;
   width: 8rem;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  transition: all 250ms;
+  border: 1px solid white;
 }
 
 .clear-btn {
-  background-color: #fff;
-  color: var(--color-pink-500);
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.clear-btn:hover {
+  background-color: rgba(255, 255, 255, 1);
 }
 
 .start-btn {
-  color: #fff;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: var(--color-pink-500);
+}
+
+.start-btn:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.stop-btn {
   background-color: var(--color-pink-500);
+  color: rgba(255, 255, 255, 0.8);
+  border-color: transparent;
+}
+
+.stop-btn {
+  color: rgba(255, 255, 255, 1);
 }
 
 button:disabled {
@@ -20,10 +38,7 @@ button:disabled {
   background-color: rgba(255, 255, 255, 0.3);
   pointer-events: none;
   box-shadow: none;
-}
-
-button:active {
-  box-shadow: none;
+  border-color: transparent;
 }
 
 @media only screen and (max-width: 280px) {
