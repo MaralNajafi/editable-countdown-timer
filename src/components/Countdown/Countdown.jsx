@@ -19,6 +19,17 @@ export default function Countdown() {
   const { seconds, minutes, isCounting, hours } = useReduxVariables();
   const dispatch = useDispatch();
 
+  const handleBlur = (time) => {
+    if (time !== "" && time !== "00") {
+      if (time.length < 2) {
+        time = time > 9 ? time : `0${time}`;
+      }
+    } else {
+      time = "00";
+    }
+    return time;
+  };
+
   function handleCountdown() {
     if (isCounting) {
       dispatch(decrement());
@@ -48,7 +59,7 @@ export default function Countdown() {
           isCounting && handleStop();
         }}
         onBlur={() => {
-          dispatch(setHours(hours));
+          dispatch(setHours(handleBlur(hours)));
         }}
       />
       <span className="font-medium">:</span>
@@ -59,7 +70,8 @@ export default function Countdown() {
         type="text"
         maxLength="2"
         onChange={(event) => {
-          const givenMinutes = event.target.value;
+          const givenMinutes =
+            event.target.value <= 59 ? event.target.value : "59";
           dispatch(setMinutes(givenMinutes.replace(/[^0-9]/g, "")));
         }}
         onFocus={() => {
@@ -67,7 +79,7 @@ export default function Countdown() {
           isCounting && handleStop();
         }}
         onBlur={() => {
-          dispatch(setMinutes(minutes));
+          dispatch(setMinutes(handleBlur(minutes)));
         }}
       />
       <span className="font-medium">:</span>
@@ -87,7 +99,7 @@ export default function Countdown() {
           isCounting && handleStop();
         }}
         onBlur={() => {
-          dispatch(setSeconds(seconds));
+          dispatch(setSeconds(handleBlur(seconds)));
         }}
       />
     </div>
