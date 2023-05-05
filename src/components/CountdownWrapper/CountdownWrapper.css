@@ -4,16 +4,24 @@
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border-radius: 10px;
+  margin-inline: 2rem;
   min-height: 20rem;
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
   transition: all 250ms;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 600px) {
   .countdown-wrapper {
     height: 100vh;
     max-width: 100%;
     border-radius: 0;
+    margin-inline: 0;
+  }
+}
+
+@media only screen and (max-width: 280px) {
+  .countdown-wrapper h1 {
+    font-size: 1.2rem;
   }
 }

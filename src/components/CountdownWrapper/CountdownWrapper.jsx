@@ -33,7 +33,7 @@ export default function CountdownWrapper({ title }) {
     <div className="countdown-wrapper flex flex-col justify-center items-center p-4">
       <h1 className="text-white text-3xl text-center capitalize">{title}</h1>
       <Countdown />
-      <div className="flex flex-row justify-center gap-12">
+      <div className="flex flex-row justify-center gap-4">
         <Button
           className={"capitalize font-medium rounded-3xl py-2 start-btn"}
           disabled={+computedSeconds === 0 ? true : false}
