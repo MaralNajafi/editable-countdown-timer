@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useRef } from "react";
 import "./Countdown.css";
 import { useDispatch } from "react-redux";
 import useReduxVariables from "../../hooks/useReduxVariables";
@@ -6,45 +6,17 @@ import useInterval from "../../hooks/useInterval";
 import {
   setMinutes,
   setSeconds,
-  setComputedSeconds,
   decrement,
   setIsCounting,
 } from "../../features/counter/counterSlice.js";
 
 export default function Countdown() {
-  const { seconds, minutes, SEC_PER_MIN, computedSeconds, isCounting } =
-    useReduxVariables();
-  // let countdownInterval;
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(setComputedSeconds(minutes * SEC_PER_MIN + Number(seconds)));
-  }, [minutes, seconds, dispatch, SEC_PER_MIN]);
-
   const secondsInputRef = useRef();
   const minutesInputRef = useRef();
+  const hoursInputRef = useRef();
 
-  function handleTimeDisplay(input) {
-    if (input !== "" && input !== "00") {
-      if (input.length < 2) {
-        input = input > 9 ? input : `0${input}`;
-      }
-    } else {
-      input = "00";
-    }
-    return input;
-  }
-
-  const handleTime = useCallback(() => {
-    const minutesDisplay = Math.floor(computedSeconds / SEC_PER_MIN);
-    const secondsDisplay = Math.floor(computedSeconds % SEC_PER_MIN);
-
-    dispatch(
-      setMinutes(minutesDisplay >= 10 ? minutesDisplay : `0${minutesDisplay}`)
-    );
-    dispatch(
-      setSeconds(secondsDisplay >= 10 ? secondsDisplay : `0${secondsDisplay}`)
-    );
-  }, [SEC_PER_MIN, computedSeconds, dispatch]);
+  const { seconds, minutes, isCounting, hours } = useReduxVariables();
+  const dispatch = useDispatch();
 
   function handleCountdown() {
     if (isCounting) {
@@ -52,14 +24,9 @@ export default function Countdown() {
     }
   }
 
-  function handleStop() {
+  const handleStop = () => {
     dispatch(setIsCounting(false));
-  }
-
-  useEffect(() => {
-    isCounting && handleTime();
-    +computedSeconds === 0 && dispatch(setIsCounting(false));
-  }, [computedSeconds, isCounting, handleTime, dispatch]);
+  };
 
   useInterval(handleCountdown, 1000, isCounting);
 
@@ -80,7 +47,7 @@ export default function Countdown() {
           isCounting && handleStop();
         }}
         onBlur={() => {
-          dispatch(setMinutes(handleTimeDisplay(minutes)));
+          dispatch(setMinutes(minutes));
         }}
       />
       <span className="font-medium">:</span>
@@ -100,7 +67,7 @@ export default function Countdown() {
           isCounting && handleStop();
         }}
         onBlur={() => {
-          dispatch(setSeconds(handleTimeDisplay(seconds)));
+          dispatch(setSeconds(seconds));
         }}
       />
     </div>
