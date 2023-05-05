@@ -49,7 +49,7 @@ export const counterSlice = createSlice({
         Math.floor(state.computedSeconds / SEC_PER_MIN) % SEC_PER_MIN
       );
       state.seconds = handleDisplayTime(state.computedSeconds % SEC_PER_MIN);
-      if (state.computedSeconds) {
+      if (state.computedSeconds === 0) {
         state.isCounting = false;
       }
     },
