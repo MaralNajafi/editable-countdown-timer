@@ -43,7 +43,7 @@ export default function Countdown() {
   useInterval(handleCountdown, 1000, isCounting);
 
   return (
-    <div className="countdown flex flex-row justify-center items-center">
+    <div className="countdown flex flex-row justify-center items-center mb-3">
       <input
         className="text-center"
         ref={hoursInputRef}
