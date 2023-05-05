@@ -23,6 +23,10 @@ export const counterSlice = createSlice({
   name: "counter",
   initialState,
   reducers: {
+    setHours: (state, action) => {
+      state.hours = action.payload;
+      state.computedSeconds = Number(state.hours) * SEC_PER_MIN * SEC_PER_MIN;
+    },
     setMinutes: (state, action) => {
       state.minutes = action.payload;
       state.computedSeconds =
@@ -32,10 +36,6 @@ export const counterSlice = createSlice({
       state.seconds = action.payload;
       state.computedSeconds =
         Number(state.minutes) * SEC_PER_MIN + Number(state.seconds);
-    },
-    setHours: (state, action) => {
-      state.hours = action.payload;
-      state.computedSeconds = Number(state.hours) * SEC_PER_MIN * SEC_PER_MIN;
     },
     setComputedSeconds: (state, action) => {
       state.computedSeconds = action.payload;

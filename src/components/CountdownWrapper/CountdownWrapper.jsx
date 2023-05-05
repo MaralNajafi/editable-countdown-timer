@@ -24,6 +24,7 @@ export default function CountdownWrapper({ title }) {
   function handleClear() {
     dispatch(setMinutes("00"));
     dispatch(setSeconds("00"));
+    dispatch(setIsCounting(false));
   }
 
   return (
